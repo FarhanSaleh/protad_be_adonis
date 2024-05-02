@@ -7,8 +7,12 @@ export default class MembersController {
     try {
       const page = request.input('page', 1)
       const perPage = request.input('per_page', 10)
+      const batchId = request.input('batch_id')
 
-      const members = await Member.query().preload('batches').paginate(page, perPage)
+      const members = await Member.query()
+        .if(batchId, (query) => query.where('batch_id', batchId))
+        .preload('batches')
+        .paginate(page, perPage)
 
       return response.status(200).json({
         message: 'success',
