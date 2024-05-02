@@ -23,3 +23,9 @@ import Route from '@ioc:Adonis/Core/Route'
 Route.get('/', async () => {
   return { hello: 'world' }
 })
+
+Route.group(() => {
+  Route.get('/members', 'MembersController.index')
+  Route.post('/members', 'MembersController.store')
+  Route.get('/members/:id', 'MembersController.show')
+}).prefix('/api')
