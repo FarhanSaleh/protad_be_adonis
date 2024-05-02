@@ -16,7 +16,7 @@ export default class MembersController {
 
       return response.status(200).json({
         message: 'success',
-        data: members,
+        members: members,
       })
     } catch (error) {
       return response.status(404).json({
